@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A focused job-search command center." />
+    <title>Career Command Center</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Career Command Center</p>
+        <div class="hero-row">
+          <div>
+            <h1>Make your next move count.</h1>
+            <p class="lede">A calm, private place to track roles, follow-ups, and weekly momentum.</p>
+          </div>
+          <button class="primary" id="add-role">Add a role <span aria-hidden="true">→</span></button>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Career summary">
+        <article><span>Active roles</span><strong id="role-count">0</strong><small>in your pipeline</small></article>
+        <article><span>Upcoming follow-ups</span><strong id="followup-count">0</strong><small>worth your attention</small></article>
+        <article><span>Interviews</span><strong id="interview-count">0</strong><small>in progress</small></article>
+      </section>
+
+      <section class="workspace">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Pipeline</p>
+            <h2>Open opportunities</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Role filters">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="applied">Applied</button>
+            <button class="filter" data-filter="interview">Interview</button>
+          </div>
+        </div>
+        <div id="role-list" class="role-list" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>Your pipeline starts here</h3>
+          <p>Add the roles you care about, then keep every next step visible.</p>
+          <button class="quiet add-role-copy">Add your first role</button>
+        </div>
+      </section>
+
+      <section class="weekly-note">
+        <div>
+          <p class="eyebrow">Weekly reset</p>
+          <h2>What would make this week a win?</h2>
+        </div>
+        <textarea id="weekly-goal" maxlength="280" aria-describedby="goal-help" placeholder="For example: send two thoughtful follow-ups and tailor one portfolio case study."></textarea>
+        <p id="goal-help" class="sr-only">Your note is saved only in this browser.</p>
+      </section>
+    </main>
+
+    <dialog id="role-dialog">
+      <form method="dialog" id="role-form">
+        <div class="dialog-heading"><div><p class="eyebrow">New opportunity</p><h2>Add a role</h2></div><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div>
+        <label>Company <input name="company" autocomplete="organization" required /></label>
+        <label>Role <input name="title" autocomplete="organization-title" required /></label>
+        <div class="form-row"><label>Stage <select name="stage"><option value="saved">Saved</option><option value="applied">Applied</option><option value="interview">Interview</option></select></label><label>Follow-up <input name="followup" type="date" /></label></div>
+        <label>Note <textarea name="note" placeholder="What makes this one interesting?"></textarea></label>
+        <div class="dialog-actions"><button type="button" id="cancel-role" class="quiet">Cancel</button><button value="default" class="primary">Save opportunity</button></div>
+      </form>
+    </dialog>
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+    <script src="src/app.js"></script>
+  </body>
+</html>
